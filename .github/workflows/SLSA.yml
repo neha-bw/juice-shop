@@ -1,10 +1,8 @@
 name: example workflow
-
 on: 
   push:
     tags:
       - "*"
-
 jobs:
   scribe-report-test:
     runs-on: ubuntu-latest
@@ -25,3 +23,4 @@ jobs:
         with:
           name: provenance
           path: ${{ steps.valint_slsa_statement.outputs.OUTPUT_PATH }}
+    
