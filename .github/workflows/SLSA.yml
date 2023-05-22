@@ -1,8 +1,10 @@
 name: example workflow
+
 on: 
   push:
     tags:
       - "*"
+
 jobs:
   scribe-report-test:
     runs-on: ubuntu-latest
@@ -18,9 +20,10 @@ jobs:
         with:
           target: mongo-express:1.0.0-alpha.4
           format: statement-slsa
-
+          
       - uses: actions/upload-artifact@v2
         with:
           name: provenance
           path: ${{ steps.valint_slsa_statement.outputs.OUTPUT_PATH }}
-    
+
+        
