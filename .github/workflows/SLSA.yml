@@ -16,7 +16,7 @@ jobs:
         id: valint_slsa_statement
         uses: scribe-security/action-bom@master
         with:
-          target: mongo-express:1.0.0-alpha.4
+          target: git:https://github.com/neha-bw/juice-shop.git
           format: statement-slsa
           
       - uses: actions/upload-artifact@v2
