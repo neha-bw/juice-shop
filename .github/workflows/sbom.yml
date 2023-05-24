@@ -1,7 +1,8 @@
 name:  Generate_SBOM_workflow
 
 on: 
-  push
+  push:
+  workflow_dispatch:
   
 jobs:
   scribe-report-test:
