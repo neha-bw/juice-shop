@@ -7,6 +7,8 @@ on:
 jobs:
   scribe-report-test:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     steps:
     - name: Generate cyclonedx json SBOM
       uses: scribe-security/action-bom@master
@@ -18,4 +20,15 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: sbom-test
+        path: scribe/valint
+
+    - name: valint attest
+      uses: scribe-security/action-bom@master
+      with:
+        target: 'https://github.com/neha-bw/juice-shop.git'
+        format: attest
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: sbom-attest
         path: scribe/valint
