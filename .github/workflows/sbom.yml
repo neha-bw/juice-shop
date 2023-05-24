@@ -1,27 +1,15 @@
 name:  scribe_github_workflow
 
 on: 
-  push:
-    tags:
-      - "*"
-
+  push
+  
 jobs:
   scribe-report-test:
     runs-on: ubuntu-latest
     steps:
-
-        uses: scribe-security/action-bom@master
-        with:
-          target: [target]
-          format: [attest, statement, attest-slsa, statement-slsa]
-          scribe-enable: true
-          scribe-client-id: ${{ secrets.clientid }}
-          scribe-client-secret: ${{ secrets.clientsecret }}
-
-        uses: scribe-security/action-verify@master
-        with:
-          target: [target]
-          format: [attest, statement, attest-slsa, statement-slsa]
-          scribe-enable: true
-          scribe-client-id: ${{ secrets.clientid }}
-          scribe-client-secret: ${{ secrets.clientsecret }}
+    - name: Generate cyclonedx json SBOM
+      uses: scribe-security/action-bom@master
+      with:
+        type: git
+        target: 'https://github.com/neha-bw/juice-shop.git'
+        format: json
