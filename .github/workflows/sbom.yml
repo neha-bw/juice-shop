@@ -1,4 +1,4 @@
-name:  scribe_github_workflow
+name:  Generate_SBOM_workflow
 
 on: 
   push
@@ -13,3 +13,8 @@ jobs:
         type: git
         target: 'https://github.com/neha-bw/juice-shop.git'
         format: json
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: sbom-test
+        path: scribe/valint
