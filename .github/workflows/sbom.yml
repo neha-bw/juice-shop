@@ -11,11 +11,16 @@ jobs:
       id-token: write
     steps:
     - name: Generate cyclonedx json SBOM
+      id: valiant_bom
       uses: scribe-security/action-bom@master
       with:
         type: git
         target: 'https://github.com/neha-bw/juice-shop.git'
         format: json
+        scribe-enable: true
+        scribe-client-id: ${{ secrets.clientid }}
+        scribe-client-secret: ${{ secrets.clientsecret }}
+        product-key: juiceShop
         
     - uses: actions/upload-artifact@v2
       with:
