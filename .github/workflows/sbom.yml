@@ -54,6 +54,10 @@ jobs:
       with:
         target: git:https://github.com/neha-bw/juice-shop.git
         input-format: attest-slsa
+        scribe-enable: true
+        scribe-client-id: ${{ secrets.clientid }}
+        scribe-client-secret: ${{ secrets.clientsecret }}
+        product-key: juiceShop
       
     - uses: actions/upload-artifact@v2
       with:
