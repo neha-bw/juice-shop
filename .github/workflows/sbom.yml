@@ -62,4 +62,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: attest
-        path: ${{ steps.valint_slsa_attest.outputs.OUTPUT_PATH }}
+        path: scribe/valint
