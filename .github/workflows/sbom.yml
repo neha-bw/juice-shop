@@ -47,3 +47,15 @@ jobs:
       with:
         name: provenance
         path: ${{ steps.valint_slsa_statement.outputs.OUTPUT_PATH }}
+        
+    - name: valint verify
+      uses: scribe-security/action-verify@master
+      with:
+        target: git:https://github.com/neha-bw/juice-shop.git
+        input-format: attest-slsa
+      
+    - uses: actions/upload-artifact@v2
+      with:
+        name: attest
+        id: valint_slsa_attest
+        path: ${{ steps.valint_slsa_attest.outputs.OUTPUT_PATH }}
