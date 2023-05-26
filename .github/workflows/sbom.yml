@@ -27,13 +27,18 @@ jobs:
         name: sbom-test
         path: scribe/valint
 
-    - name: valint attest
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Generate SLSA provenance statement
+      id: valint_slsa_statement
       uses: scribe-security/action-bom@master
       with:
-        target: 'https://github.com/neha-bw/juice-shop.git'
-        format: attest
-        
+        target: git:https://github.com/neha-bw/juice-shop.git
+        format: statement-slsa
+          
     - uses: actions/upload-artifact@v2
       with:
-        name: sbom-attest
-        path: scribe/valint
+        name: provenance
+        path: ${{ steps.valint_slsa_statement.outputs.OUTPUT_PATH }}
