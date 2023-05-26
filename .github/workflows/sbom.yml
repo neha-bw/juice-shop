@@ -37,7 +37,7 @@ jobs:
       uses: scribe-security/action-bom@master
       with:
         target: git:https://github.com/neha-bw/juice-shop.git
-        format: statement-slsa
+        format: attest-slsa
         scribe-enable: true
         scribe-client-id: ${{ secrets.clientid }}
         scribe-client-secret: ${{ secrets.clientsecret }}
