@@ -10,6 +10,11 @@ jobs:
     permissions:
       id-token: write
     steps:
+    
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        
     - name: Generate cyclonedx json SBOM
       id: valiant_bom
       uses: scribe-security/action-bom@master
@@ -26,10 +31,6 @@ jobs:
       with:
         name: sbom-test
         path: scribe/valint
-
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
 
     - name: Generate SLSA provenance statement
       id: valint_slsa_statement
