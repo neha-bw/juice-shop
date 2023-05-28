@@ -37,7 +37,7 @@ jobs:
       uses: scribe-security/action-bom@master
       with:
         target: git:https://github.com/neha-bw/juice-shop.git
-        format: attest-slsa
+        format: statement-slsa
         scribe-enable: true
         scribe-client-id: ${{ secrets.clientid }}
         scribe-client-secret: ${{ secrets.clientsecret }}
@@ -50,10 +50,10 @@ jobs:
         
     - name: valint verify
       id: valint_slsa_attest
-      uses: scribe-security/action-verify@master
+      uses: scribe-security/action-bom@master
       with:
         target: git:https://github.com/neha-bw/juice-shop.git
-        input-format: attest-slsa
+        format: attest-slsa
         scribe-enable: true
         scribe-client-id: ${{ secrets.clientid }}
         scribe-client-secret: ${{ secrets.clientsecret }}
