@@ -1,0 +1,35 @@
+name:  Generate_SBOM_workflow
+
+on: 
+  push:
+  workflow_dispatch:
+  
+jobs:
+  scribe-report-test:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+    
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        
+    - name: Generate cyclonedx json SBOM
+      id: valiant_bom
+      uses: scribe-security/action-bom@master
+      with:
+        type: git
+        target: 'https://github.com/neha-bw/juice-shop.git'
+        format: json
+        scribe-enable: true
+        scribe-client-id: ${{ secrets.clientid }}
+        scribe-client-secret: ${{ secrets.clientsecret }}
+        product-key: juiceShop
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: sbom-test
+        path: scribe/valint
+
+   
