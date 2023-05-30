@@ -1,0 +1,34 @@
+name:  Generate_SBOM_workflow
+
+on: 
+  push:
+  workflow_dispatch:
+  
+jobs:
+  scribe-report-test:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+    
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        
+    - name: Generate SLSA provenance statement
+      id: valint_slsa_statement
+      uses: scribe-security/action-bom@master
+      with:
+        target: git:https://github.com/neha-bw/juice-shop.git
+        format: statement-slsa
+        scribe-enable: true
+        scribe-client-id: ${{ secrets.clientid }}
+        scribe-client-secret: ${{ secrets.clientsecret }}
+        product-key: juiceShop
+          
+    - uses: actions/upload-artifact@v2
+      with:
+        name: provenance
+        path: ${{ steps.valint_slsa_statement.outputs.OUTPUT_PATH }}
+        
+  
