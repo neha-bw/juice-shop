@@ -1,0 +1,32 @@
+name:  Generate_SBOM_workflow
+
+on: 
+  push:
+  workflow_dispatch:
+  
+jobs:
+  scribe-report-test:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+    
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+           
+    - name: valint verify
+      id: valint_slsa_attest
+      uses: scribe-security/action-bom@master
+      with:
+        target: git:https://github.com/neha-bw/juice-shop.git
+        format: attest-slsa
+        scribe-enable: true
+        scribe-client-id: ${{ secrets.clientid }}
+        scribe-client-secret: ${{ secrets.clientsecret }}
+        product-key: juiceShop
+      
+    - uses: actions/upload-artifact@v2
+      with:
+        name: attest
+        path: ${{ steps.valint_slsa_attest.outputs.OUTPUT_PATH }}
