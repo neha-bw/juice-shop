@@ -1,4 +1,4 @@
-name:  Generate_SBOM_workflow
+name:  Generate_SBOM_cycloneDX
 
 on: 
   push:
