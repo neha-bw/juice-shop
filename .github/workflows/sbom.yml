@@ -16,7 +16,7 @@ jobs:
         fetch-depth: 0
         
     - name: Generate cyclonedx json SBOM
-      id: valiant_bom
+      id: valiant_json
       uses: scribe-security/action-bom@master
       with:
         type: git
@@ -29,8 +29,13 @@ jobs:
         
     - uses: actions/upload-artifact@v2
       with:
-        name: JuiceShop-sbom
-        path: ${{ steps.valint_bom.outputs.OUTPUT_PATH }}
+          name: scribe-sbom
+          path: ${{ steps.valint_json.outputs.OUTPUT_PATH }}
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: scribe-evidence
+        path: scribe/
 
     - name: Generate SLSA provenance statement
       id: valint_slsa_statement
