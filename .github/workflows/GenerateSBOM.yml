@@ -14,13 +14,13 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-        
+
     - name: Generate cyclonedx json SBOM
-      id: valiant_bom
+      id: valint_json
       uses: scribe-security/action-bom@master
       with:
-        type: git
         target: 'https://github.com/neha-bw/juice-shop.git'
+        output-file: 'JuiceShp.json'
         format: json
         scribe-enable: true
         scribe-client-id: ${{ secrets.clientid }}
@@ -29,7 +29,9 @@ jobs:
         
     - uses: actions/upload-artifact@v2
       with:
-        name: sbom-test
-        path: scribe/valint
+        name: scribe-sbom
+        path: ${{ steps.valint_json.outputs.OUTPUT_PATH }}
 
-   
+
+
+
