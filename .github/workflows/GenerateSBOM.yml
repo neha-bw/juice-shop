@@ -19,8 +19,9 @@ jobs:
       id: valint_json
       uses: scribe-security/action-bom@master
       with:
+        type: git
         target: 'https://github.com/neha-bw/juice-shop.git'
-        output-file: 'JuiceShp.json'
+        output-file: 'JuiceShop.json'
         format: json
         scribe-enable: true
         scribe-client-id: ${{ secrets.clientid }}
