@@ -19,8 +19,8 @@ jobs:
       id: valiant_json
       uses: scribe-security/action-bom@master
       with:
-        type: git
-        target: 'https://github.com/neha-bw/juice-shop.git'
+        #type: git
+        target: git:https://github.com/neha-bw/juice-shop.git
         format: json
         scribe-enable: true
         scribe-client-id: ${{ secrets.clientid }}
@@ -30,7 +30,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
           name: scribe-sbom
-          path: ${{ steps.valint_json.outputs.OUTPUT_PATH }}
+          path: ${{ steps.valiant_json.outputs.OUTPUT_PATH }}
 
     - uses: actions/upload-artifact@v2
       with:
