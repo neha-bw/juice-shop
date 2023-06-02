@@ -32,11 +32,6 @@ jobs:
           name: scribe-sbom
           path: ${{ steps.valiant_json.outputs.OUTPUT_PATH }}
 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: scribe-evidence
-        path: scribe/
-
     - name: Generate SLSA provenance statement
       id: valint_slsa_statement
       uses: scribe-security/action-bom@master
