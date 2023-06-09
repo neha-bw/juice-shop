@@ -10,18 +10,14 @@ jobs:
     permissions:
       id-token: write
     steps:
-    
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
 
     - name: Generate cyclonedx json SBOM
       id: valint_json
       uses: scribe-security/action-bom@master
       with:
-        type: git
-        target: 'https://github.com/neha-bw/juice-shop.git'
-        output-file: 'JuiceShop.json'
+       # type: git
+        target: docker:mongo-express
+        output-file: 'mongo-express.json'
         format: json
         scribe-enable: true
         scribe-client-id: ${{ secrets.clientid }}
