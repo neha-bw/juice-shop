@@ -1,7 +1,6 @@
 name: "ZAP Baseline Scan"
 
-on:
-none
+on: workflow_dispatch
 
 jobs:
   zap_scan:
